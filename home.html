@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CampusPulse - Home</title>
+
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <nav>
+
+        <h2>🎓 CampusPulse</h2>
+
+        <ul>
+
+            <li><a href="home.html">Home</a></li>
+
+            <li><a href="events.html">Events</a></li>
+
+            <li><a href="workshops.html">Workshops</a></li>
+
+            <li><a href="sports.html">Sports</a></li>
+
+            <li><a href="about.html">About</a></li>
+
+        </ul>
+
+        <!-- Logged-in User -->
+
+        <div class="user-info">
+
+            👤 <span id="userName">Guest</span>
+
+        </div>
+
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>Welcome to CampusPulse</h1>
+
+            <p>
+                Discover workshops, hackathons,
+                sports events, cultural fests,
+                and academic opportunities.
+            </p>
+
+            <a href="events.html">
+
+                <button>
+
+                    Explore Events
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </section>
+    <section class="categories">
+
+        <h2>Event Categories</h2>
+
+        <div class="card-container">
+
+            <div class="card">💻 Hackathons</div>
+
+            <div class="card">📚 Workshops</div>
+
+            <div class="card">🏆 Sports</div>
+
+            <div class="card">🎭 Cultural</div>
+
+            <div class="card">🎤 Seminars</div>
+
+            <div class="card">🔬 Symposiums</div>
+
+        </div>
+
+    </section>
+
+    <section class="event-day">
+
+        <h2>🌟 Event of the Day</h2>
+
+        <div class="event-box">
+
+            <h3 id="eventName">
+                AI & Machine Learning Workshop
+            </h3>
+
+        </div>
+
+    </section>
+
+<section class="upcoming">
+
+    <h2>Upcoming Events</h2>
+    <div class="event-card">
+
+        <h3>AI Workshop</h3>
+
+        <p>Date: 25 June 2026</p>
+
+        <div class="btn-group">
+
+            <button onclick="showDetails('ai')">
+                Details
+            </button>
+
+            <button onclick="showRegister('ai')">
+                Register
+            </button>
+
+        </div>
+
+        <div id="ai-details" class="hidden-box">
+
+            <h4>AI Workshop Details</h4>
+
+            <p>
+                Learn Artificial Intelligence,
+                Machine Learning, and ChatGPT tools.
+            </p>
+
+            <p>
+                Venue: Seminar Hall
+            </p>
+
+            <p>
+                Time: 10:00 AM
+            </p>
+
+        </div>
+
+        <div id="ai-register" class="hidden-box">
+
+            <h4>Registration Form</h4>
+
+            <form>
+
+                <input type="text"
+                       placeholder="Enter Name"
+                       required>
+
+                <input type="email"
+                       placeholder="Enter Email"
+                       required>
+
+                <button type="submit">
+                    Submit
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="event-card">
+
+        <h3>Hackathon 2026</h3>
+
+        <p>Date: 30 June 2026</p>
+
+        <div class="btn-group">
+
+            <button onclick="showDetails('hackathon')">
+                Details
+            </button>
+
+            <button onclick="showRegister('hackathon')">
+                Register
+            </button>
+
+        </div>
+
+        <div id="hackathon-details" class="hidden-box">
+
+            <h4>Hackathon Details</h4>
+
+            <p>
+                24-Hour Coding Challenge with exciting prizes.
+            </p>
+
+            <p>
+                Venue: Innovation Lab
+            </p>
+
+            <p>
+                Time: 09:00 AM
+            </p>
+
+        </div>
+
+        <div id="hackathon-register" class="hidden-box">
+
+            <h4>Registration Form</h4>
+
+            <form>
+
+                <input type="text"
+                       placeholder="Enter Name"
+                       required>
+
+                <input type="email"
+                       placeholder="Enter Email"
+                       required>
+
+                <button type="submit">
+                    Submit
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="event-card">
+
+        <h3>Sports Meet</h3>
+
+        <p>Date: 05 July 2026</p>
+
+        <div class="btn-group">
+
+            <button onclick="showDetails('sports')">
+                Details
+            </button>
+
+            <button onclick="showRegister('sports')">
+                Register
+            </button>
+
+        </div>
+
+        <div id="sports-details" class="hidden-box">
+
+            <h4>Sports Meet Details</h4>
+
+            <p>
+                Participate in Cricket, Football,
+                Volleyball and Athletics.
+            </p>
+
+            <p>
+                Venue: College Ground
+            </p>
+
+            <p>
+                Time: 08:00 AM
+            </p>
+
+        </div>
+
+        <div id="sports-register" class="hidden-box">
+
+            <h4>Registration Form</h4>
+
+            <form>
+
+                <input type="text"
+                       placeholder="Enter Name"
+                       required>
+
+                <input type="email"
+                       placeholder="Enter Email"
+                       required>
+
+                <button type="submit">
+                    Submit
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <h2>500+</h2>
+
+            <p>Students</p>
+
+        </div>
+
+        <div class="stat">
+
+            <h2>50+</h2>
+
+            <p>Events</p>
+
+        </div>
+
+        <div class="stat">
+
+            <h2>20+</h2>
+
+            <p>Colleges</p>
+
+        </div>
+
+        <div class="stat">
+
+            <h2>100+</h2>
+
+            <p>Certificates</p>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <p>
+            © 2026 CampusPulse |
+            University Event Portal
+        </p>
+
+    </footer>
+
+    <script src="home.js"></script>
+
+</body>
+
+</html>

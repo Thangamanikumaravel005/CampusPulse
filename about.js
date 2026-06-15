@@ -1,0 +1,92 @@
+function openFeedback(){
+
+    document.getElementById(
+        "feedbackModal"
+    ).style.display = "block";
+
+}
+
+function closeFeedback(){
+
+    document.getElementById(
+        "feedbackModal"
+    ).style.display = "none";
+
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const feedbackForm =
+        document.getElementById(
+            "feedbackForm"
+        );
+
+        feedbackForm.addEventListener(
+            "submit",
+            function(event){
+
+                event.preventDefault();
+
+                const name =
+                this.querySelector(
+                    'input[type="text"]'
+                ).value;
+
+                const email =
+                this.querySelector(
+                    'input[type="email"]'
+                ).value;
+
+                const feedback =
+                this.querySelector(
+                    "textarea"
+                ).value;
+
+                if(
+                    name.trim() === "" ||
+                    email.trim() === "" ||
+                    feedback.trim() === ""
+                ){
+
+                    alert(
+                        "Please fill all fields."
+                    );
+
+                    return;
+
+                }
+
+                alert(
+                    "Thank you for your feedback, "
+                    + name +
+                    "!"
+                );
+
+                this.reset();
+
+                closeFeedback();
+
+            }
+        );
+
+    }
+);
+
+/* Close popup when clicking outside */
+
+window.onclick = function(event){
+
+    const modal =
+    document.getElementById(
+        "feedbackModal"
+    );
+
+    if(event.target === modal){
+
+        closeFeedback();
+
+    }
+
+};
