@@ -21,9 +21,6 @@
 .brand-section h1{
     margin: 0;
 }
-
-/* BODY */
-
 body{
     min-height:100vh;
     padding:20px;
@@ -43,9 +40,6 @@ body{
     justify-content:center;
     align-items:center;
 }
-
-/* MAIN CONTAINER */
-
 .container{
     width:90%;
     max-width:1100px;
@@ -64,9 +58,6 @@ body{
 
     animation:fadeIn 1s ease;
 }
-
-/* WELCOME SECTION */
-
 .welcome-section{
     flex:1;
 
@@ -108,9 +99,6 @@ body{
 
     padding:40px;
 }
-
-/* FORM CARD */
-
 .form-card{
     width:100%;
     max-width:430px;
@@ -132,9 +120,6 @@ body{
     color:#0B1F3A;
     margin-bottom:25px;
 }
-
-/* INPUT FIELDS */
-
 .form-card input{
     width:100%;
 
@@ -158,9 +143,6 @@ body{
     border-color:#1E88E5;
     box-shadow:0 0 8px rgba(30,136,229,0.2);
 }
-
-/* PASSWORD BOX */
-
 .password-box{
     position:relative;
     width:100%;
@@ -179,9 +161,6 @@ body{
     cursor:pointer;
     font-size:18px;
 }
-
-/* BUTTON */
-
 .form-card button{
     width:100%;
 
@@ -205,9 +184,6 @@ body{
     background:#144a92;
     transform:translateY(-2px);
 }
-
-/* LINKS */
-
 .form-card p{
     margin-top:20px;
     text-align:center;
@@ -223,9 +199,6 @@ body{
 .form-card a:hover{
     text-decoration:underline;
 }
-
-/* ANIMATION */
-
 @keyframes fadeIn{
 
     from{
@@ -239,9 +212,6 @@ body{
     }
 
 }
-
-/* MOBILE RESPONSIVE */
-
 @media(max-width:768px){
 
     .container{

@@ -223,9 +223,6 @@ body{
     background:#f4f4f4;
     transform:translateY(-3px);
 }
-
-/* MOBILE */
-
 @media(max-width:768px){
 
     .event-header h1{

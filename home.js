@@ -62,9 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 });
-
-/* SHOW EVENT DETAILS */
-
 function showDetails(eventId){
 
     const details =
@@ -85,8 +82,6 @@ function showDetails(eventId){
 
 }
 
-/* SHOW REGISTRATION FORM */
-
 function showRegister(eventId){
 
     const register =
@@ -106,9 +101,6 @@ function showRegister(eventId){
     }
 
 }
-
-/* REGISTER EVENT */
-
 function registerEvent(
     eventName,
     eventDate,

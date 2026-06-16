@@ -73,9 +73,6 @@ document.addEventListener(
 
     }
 );
-
-/* Close popup when clicking outside */
-
 window.onclick = function(event){
 
     const modal =

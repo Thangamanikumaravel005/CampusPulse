@@ -35,8 +35,6 @@ const sportsEvents = [
     date: "2026-07-30"
 }
 ];
-/* SEARCH FILTER */
-
 const searchInput =
 document.getElementById("searchInput");
 
@@ -131,9 +129,6 @@ categoryFilter.addEventListener(
 "change",
 filterSports
 );
-
-/* SPORTS EVENT REGISTRATION */
-
 let selectedSportEvent = null;
 
 function openRegisterForm(
@@ -270,9 +265,6 @@ function(event){
 
 }
 );
-
-/* CLOSE POPUP WHEN CLICKING OUTSIDE */
-
 window.addEventListener(
 "click",
 function(event){

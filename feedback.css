@@ -4,9 +4,6 @@
     box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
 }
-
-/* BODY */
-
 body{
     min-height:100vh;
     padding:20px;
@@ -22,9 +19,6 @@ body{
     background-position:center;
     background-repeat:no-repeat;
 }
-
-/* HEADER */
-
 .event-header{
     background:linear-gradient(
         135deg,
@@ -54,8 +48,6 @@ body{
     font-size:1.1rem;
 }
 
-/* FEEDBACK CONTAINER */
-
 .feedback-container{
     max-width:800px;
 
@@ -69,9 +61,6 @@ body{
 
     box-shadow:0 6px 20px rgba(0,0,0,0.12);
 }
-
-/* FORM */
-
 .feedback-form{
     display:flex;
 
@@ -120,9 +109,6 @@ body{
     box-shadow:
     0 0 8px rgba(30,136,229,0.2);
 }
-
-/* RADIO BUTTONS */
-
 .radio-group{
     display:flex;
 
@@ -132,9 +118,6 @@ body{
 .radio-group label{
     font-weight:normal;
 }
-
-/* SUBMIT BUTTON */
-
 .feedback-form button{
 
     padding:12px;
@@ -162,9 +145,6 @@ body{
 
     transform:translateY(-2px);
 }
-
-/* FOOTER */
-
 .event-footer{
 
     margin-top:30px;
@@ -189,9 +169,6 @@ body{
 .footer-content p{
     margin-bottom:15px;
 }
-
-/* BACK BUTTON */
-
 .home-btn{
 
     padding:12px 25px;
@@ -217,9 +194,6 @@ body{
 
     transform:translateY(-3px);
 }
-
-/* RESPONSIVE */
-
 @media(max-width:768px){
 
     .event-header h1{

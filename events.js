@@ -39,8 +39,6 @@ document.getElementById("eventsList");
 
 let selectedEvent = null;
 
-/* DISPLAY EVENTS */
-
 function displayEvents(data){
 
     eventsList.innerHTML = "";
@@ -95,9 +93,6 @@ function displayEvents(data){
 }
 
 displayEvents(events);
-
-/* FILTERS */
-
 document.getElementById("searchInput")
 .addEventListener("input", applyFilters);
 
@@ -135,9 +130,6 @@ function applyFilters(){
     displayEvents(filtered);
 
 }
-
-/* DETAILS POPUP */
-
 function showDetails(
     title,
     date,
@@ -169,9 +161,6 @@ document.getElementById("closeBtn")
     "none";
 
 });
-
-/* REGISTER POPUP */
-
 function showRegister(eventName){
 
     selectedEvent =
@@ -194,9 +183,6 @@ document.getElementById("closeRegisterBtn")
     ).style.display = "none";
 
 });
-
-/* REGISTER EVENT */
-
 document.getElementById("registerForm")
 .addEventListener("submit", function(e){
 
@@ -295,9 +281,6 @@ document.getElementById("registerForm")
     ).style.display = "none";
 
 });
-
-/* CLOSE POPUP OUTSIDE */
-
 window.onclick = function(event){
 
     const popup =
