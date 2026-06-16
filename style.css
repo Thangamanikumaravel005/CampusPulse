@@ -1,10 +1,25 @@
-/* RESET */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:Arial, Helvetica, sans-serif;
+}
+.brand-section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0px;
+}
+
+.logo{
+    width:180px;
+    height:auto;
+    object-fit: contain;
+    margin-bottom: 0px;
+}
+
+.brand-section h1{
+    margin: 0;
 }
 
 /* BODY */

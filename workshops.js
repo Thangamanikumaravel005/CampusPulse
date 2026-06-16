@@ -1,4 +1,5 @@
 const events = [
+
 {
     name:"AI Workshop",
     category:"Workshop",
@@ -32,8 +33,13 @@ const events = [
 }
 
 ];
-const eventsList =
-document.getElementById("eventsList");
+
+const eventsList = document.getElementById("eventsList");
+
+let selectedEvent = null;
+
+/* DISPLAY EVENTS */
+
 function displayEvents(data){
 
     eventsList.innerHTML = "";
@@ -54,14 +60,11 @@ function displayEvents(data){
 
             <h3>${event.name}</h3>
 
-            <p><strong>Category:</strong>
-            ${event.category}</p>
+            <p><strong>Category:</strong> ${event.category}</p>
 
-            <p><strong>Date:</strong>
-            ${event.date}</p>
+            <p><strong>Date:</strong> ${event.date}</p>
 
-            <p><strong>Venue:</strong>
-            ${event.venue}</p>
+            <p><strong>Venue:</strong> ${event.venue}</p>
 
             <div class="button-group">
 
@@ -97,10 +100,12 @@ function displayEvents(data){
 }
 
 displayEvents(events);
+
+/* FILTERS */
+
 document
 .getElementById("searchInput")
 .addEventListener("input", applyFilters);
-
 document
 .getElementById("dateFilter")
 .addEventListener("change", applyFilters);
@@ -151,6 +156,9 @@ function applyFilters(){
     displayEvents(filtered);
 
 }
+
+/* EVENT DETAILS */
+
 function showDetails(
     title,
     date,
@@ -182,6 +190,9 @@ function showDetails(
     ).style.display = "block";
 
 }
+
+/* CLOSE DETAILS POPUP */
+
 document
 .getElementById("closeBtn")
 .addEventListener("click", function(){
@@ -191,13 +202,23 @@ document
     ).style.display = "none";
 
 });
+
+/* REGISTER POPUP */
+
 function openRegisterForm(eventName){
+
+    selectedEvent =
+    events.find(
+        event =>
+        event.name === eventName
+    );
 
     document.getElementById(
         "registerPopup"
     ).style.display = "block";
 
 }
+
 function closeRegisterForm(){
 
     document.getElementById(
@@ -207,25 +228,112 @@ function closeRegisterForm(){
 }
 
 document
-.getElementById(
-    "closeRegisterBtn"
-)
+.getElementById("closeRegisterBtn")
 .addEventListener(
     "click",
     closeRegisterForm
 );
+
+/* REGISTER EVENT */
+
 document
-.getElementById(
-    "registerForm"
-)
+.getElementById("registerForm")
 .addEventListener(
     "submit",
-    function(event){
+    function(e){
 
-        event.preventDefault();
+        e.preventDefault();
+
+        if(!selectedEvent){
+
+            alert(
+                "Please select an event first."
+            );
+
+            return;
+        }
+
+        const currentUser =
+        JSON.parse(
+            localStorage.getItem(
+                "currentUser"
+            )
+        );
+
+        if(!currentUser){
+
+            alert(
+                "Please login first!"
+            );
+
+            window.location.href =
+            "login.html";
+
+            return;
+        }
+
+        let registeredEvents =
+        JSON.parse(
+            localStorage.getItem(
+                "registeredEvents"
+            )
+        ) || [];
+
+        const alreadyRegistered =
+        registeredEvents.some(
+            event =>
+
+            event.userEmail ===
+            currentUser.email &&
+
+            event.eventName ===
+            selectedEvent.name
+        );
+
+        if(alreadyRegistered){
+
+            alert(
+                "You have already registered for this event."
+            );
+
+            return;
+        }
+
+        registeredEvents.push({
+
+            userName:
+            currentUser.name,
+
+            userEmail:
+            currentUser.email,
+
+            eventName:
+            selectedEvent.name,
+
+            category:
+            selectedEvent.category,
+
+            date:
+            selectedEvent.date,
+
+            venue:
+            selectedEvent.venue,
+
+            status:
+            "Registered"
+
+        });
+
+        localStorage.setItem(
+            "registeredEvents",
+            JSON.stringify(
+                registeredEvents
+            )
+        );
 
         alert(
-            "Registration Successful!"
+            selectedEvent.name +
+            " Registered Successfully!"
         );
 
         this.reset();
@@ -234,50 +342,57 @@ document
 
     }
 );
-window.onclick = function(event){
 
-    const detailsPopup =
-    document.getElementById(
-        "popup"
-    );
+/* CLOSE POPUPS WHEN CLICKING OUTSIDE */
 
-    const registerPopup =
-    document.getElementById(
-        "registerPopup"
-    );
+window.addEventListener(
+    "click",
+    function(event){
 
-    if(event.target === detailsPopup){
+        const detailsPopup =
+        document.getElementById(
+            "popup"
+        );
 
-        detailsPopup.style.display =
-        "none";
+        const registerPopup =
+        document.getElementById(
+            "registerPopup"
+        );
+
+        if(event.target === detailsPopup){
+
+            detailsPopup.style.display =
+            "none";
+
+        }
+
+        if(event.target === registerPopup){
+
+            registerPopup.style.display =
+            "none";
+
+        }
 
     }
+);
+function showNotification(message){
 
-    if(event.target === registerPopup){
+    const notification =
+    document.getElementById(
+        "notification"
+    );
 
-        registerPopup.style.display =
+    notification.textContent =
+    message;
+
+    notification.style.display =
+    "block";
+
+    setTimeout(function(){
+
+        notification.style.display =
         "none";
 
-    }
+    },3000);
 
-};
-function openRegisterForm(){
-    document.getElementById("registerPopup").style.display = "block";
 }
-
-function closeRegisterForm(){
-    document.getElementById("registerPopup").style.display = "none";
-}
-
-document.getElementById("registerForm")
-.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    alert("Registration Successful!");
-
-    this.reset();
-
-    closeRegisterForm();
-
-});

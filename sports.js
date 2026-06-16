@@ -1,42 +1,41 @@
 const sportsEvents = [
-    {
-        name: "Inter College Cricket Tournament",
-        category: "Cricket",
-        date: "2026-07-05"
-    },
+{
+    name: "Inter College Cricket Tournament",
+    category: "Cricket",
+    date: "2026-07-05"
+},
 
-    {
-        name: "Football League Championship",
-        category: "Football",
-        date: "2026-07-10"
-    },
+{
+    name: "Football League Championship",
+    category: "Football",
+    date: "2026-07-10"
+},
 
-    {
-        name: "Volleyball Tournament",
-        category: "Volleyball",
-        date: "2026-07-15"
-    },
+{
+    name: "Volleyball Tournament",
+    category: "Volleyball",
+    date: "2026-07-15"
+},
 
-    {
-        name: "Track & Field Meet",
-        category: "Athletics",
-        date: "2026-07-20"
-    },
+{
+    name: "Track & Field Meet",
+    category: "Athletics",
+    date: "2026-07-20"
+},
 
-    {
-        name: "Basketball Championship",
-        category: "Basketball",
-        date: "2026-07-25"
-    },
+{
+    name: "Basketball Championship",
+    category: "Basketball",
+    date: "2026-07-25"
+},
 
-    {
-        name: "Badminton Open",
-        category: "Indoor Sports",
-        date: "2026-07-30"
-    }
+{
+    name: "Badminton Open",
+    category: "Indoor Sports",
+    date: "2026-07-30"
+}
 ];
-
-/* Search and Filter Elements */
+/* SEARCH FILTER */
 
 const searchInput =
 document.getElementById("searchInput");
@@ -52,237 +51,262 @@ document.querySelectorAll(".event-card");
 
 function filterSports(){
 
-    const searchText =
-    searchInput.value.toLowerCase();
+const searchText =
+searchInput.value.toLowerCase();
 
-    const selectedDate =
-    dateFilter.value;
+const selectedDate =
+dateFilter.value;
 
-    const selectedCategory =
-    
-    categoryFilter.value;
+const selectedCategory =
+categoryFilter.value;
 
-    cards.forEach(card => {
+cards.forEach(card => {
 
-        const title =
-        card.querySelector("h3")
-        .textContent
-        .toLowerCase();
+    const title =
+    card.querySelector("h3")
+    .textContent
+    .toLowerCase();
 
-        const categoryText =
-        card.querySelector("p")
-        .textContent;
+    const categoryText =
+    card.querySelector("p")
+    .textContent;
 
-        const cardText =
-        card.textContent;
+    const cardText =
+    card.textContent;
 
-        let matchesSearch =
-        title.includes(searchText);
+    let matchesSearch =
+    title.includes(searchText);
 
-        let matchesDate =
-        true;
+    let matchesDate = true;
 
-        let matchesCategory =
-        true;
+    let matchesCategory = true;
 
-        if(selectedDate){
+    if(selectedDate){
 
-            matchesDate =
-            cardText.includes(selectedDate);
-        }
+        matchesDate =
+        cardText.includes(selectedDate);
 
-        if(selectedCategory !== "all"){
+    }
 
-            matchesCategory =
-            categoryText.includes(
-                selectedCategory
-            );
-        }
+    if(selectedCategory !== "all"){
 
-        if(
-            matchesSearch &&
-            matchesDate &&
-            matchesCategory
-        ){
+        matchesCategory =
+        categoryText.includes(
+            selectedCategory
+        );
 
-            card.style.display =
-            "block";
+    }
 
-        }
-        else{
+    if(
+        matchesSearch &&
+        matchesDate &&
+        matchesCategory
+    ){
 
-            card.style.display =
-            "none";
+        card.style.display =
+        "block";
 
-        }
+    }
+    else{
 
-    });
+        card.style.display =
+        "none";
 
+    }
+
+});
 }
 
-/* Event Listeners */
-
 searchInput.addEventListener(
-    "input",
-    filterSports
+"input",
+filterSports
 );
 
 dateFilter.addEventListener(
-    "change",
-    filterSports
+"change",
+filterSports
 );
 
 categoryFilter.addEventListener(
-    "change",
-    filterSports
+"change",
+filterSports
 );
 
-/* Register Button */
+/* SPORTS EVENT REGISTRATION */
 
-const registerButtons =
-document.querySelectorAll(
-    ".event-card button"
+let selectedSportEvent = null;
+
+function openRegisterForm(
+eventName,
+category,
+date,
+venue
+){
+selectedSportEvent = {
+
+    name: eventName,
+    category: category,
+    date: date,
+    venue: venue
+
+};
+
+document.getElementById(
+    "registerPopup"
+).style.display = "block";
+}
+
+function closeRegisterForm(){
+document.getElementById(
+    "registerPopup"
+).style.display = "none";
+}
+
+document.getElementById(
+"closeRegisterBtn"
+).addEventListener(
+"click",
+closeRegisterForm
 );
 
-registerButtons.forEach(button => {
+document.getElementById(
+"registerForm"
+).addEventListener(
+"submit",
+function(event){
+    event.preventDefault();
 
-    button.addEventListener(
-        "click",
-        function(){
-
-            const eventName =
-            this.parentElement
-            .querySelector("h3")
-            .textContent;
-
-            alert(
-                "Successfully registered for:\n\n" +
-                eventName
-            );
-
-        }
+    const currentUser =
+    JSON.parse(
+        localStorage.getItem(
+            "currentUser"
+        )
     );
 
-});
-function openRegisterForm(){
+    if(!currentUser){
 
-    document.getElementById(
-        "registerPopup"
-    ).style.display = "block";
-
-}
-
-function closeRegisterForm(){
-
-    document.getElementById(
-        "registerPopup"
-    ).style.display = "none";
-
-}
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        const form =
-        document.getElementById(
-            "registerForm"
+        alert(
+            "Please login first!"
         );
 
-        if(form){
+        window.location.href =
+        "login.html";
 
-            form.addEventListener(
-                "submit",
-                function(event){
-
-                    event.preventDefault();
-
-                    alert(
-                        "Registration Successful!"
-                    );
-
-                    this.reset();
-
-                    closeRegisterForm();
-
-                }
-            );
-
-        }
+        return;
 
     }
-);
-// Open Registration Form
 
-function openRegisterForm(){
+    let registeredEvents =
+    JSON.parse(
+        localStorage.getItem(
+            "registeredEvents"
+        )
+    ) || [];
 
-    document.getElementById(
-        "registerPopup"
-    ).style.display = "block";
+    const alreadyRegistered =
+    registeredEvents.some(
+        item =>
 
-}
+        item.userEmail ===
+        currentUser.email &&
 
-// Close Registration Form
+        item.eventName ===
+        selectedSportEvent.name
+    );
 
-function closeRegisterForm(){
+    if(alreadyRegistered){
 
-    document.getElementById(
-        "registerPopup"
-    ).style.display = "none";
-
-}
-
-// Registration Submit
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        const form =
-        document.getElementById(
-            "registerForm"
+        alert(
+            "You have already registered for this event."
         );
 
-        if(form){
-
-            form.addEventListener(
-                "submit",
-                function(event){
-
-                    event.preventDefault();
-
-                    alert(
-                        "Sports Event Registration Successful!"
-                    );
-
-                    this.reset();
-
-                    closeRegisterForm();
-
-                }
-            );
-
-        }
+        return;
 
     }
+
+    registeredEvents.push({
+
+        userName:
+        currentUser.name,
+
+        userEmail:
+        currentUser.email,
+
+        eventName:
+        selectedSportEvent.name,
+
+        category:
+        selectedSportEvent.category,
+
+        date:
+        selectedSportEvent.date,
+
+        venue:
+        selectedSportEvent.venue,
+
+        status:
+        "Registered"
+
+    });
+
+    localStorage.setItem(
+
+        "registeredEvents",
+
+        JSON.stringify(
+            registeredEvents
+        )
+
+    );
+
+    showNotification(
+    selectedSportEvent.name +
+    " Registered Successfully!"
 );
 
-// Close Popup When Clicking Outside
+    this.reset();
+
+    closeRegisterForm();
+
+}
+);
+
+/* CLOSE POPUP WHEN CLICKING OUTSIDE */
 
 window.addEventListener(
-    "click",
-    function(event){
+"click",
+function(event){
+    const popup =
+    document.getElementById(
+        "registerPopup"
+    );
 
-        const popup =
-        document.getElementById(
-            "registerPopup"
-        );
+    if(event.target === popup){
 
-        if(event.target === popup){
-
-            closeRegisterForm();
-
-        }
+        closeRegisterForm();
 
     }
+
+}
 );
+function showNotification(message){
+
+    const notification =
+    document.getElementById(
+        "notification"
+    );
+
+    notification.textContent =
+    message;
+
+    notification.style.display =
+    "block";
+
+    setTimeout(function(){
+
+        notification.style.display =
+        "none";
+
+    },3000);
+
+}

@@ -15,34 +15,112 @@
 
     <nav>
 
-        <h2>🎓 CampusPulse</h2>
+    <!-- Logo Section -->
+    <div class="logo-section">
 
-        <ul>
+        <img src="logo.png"
+             alt="CampusPulse Logo"
+             class="nav-logo">
 
-            <li><a href="home.html">Home</a></li>
+        <h2>CampusPulse</h2>
 
-            <li><a href="events.html">Events</a></li>
+    </div>
 
-            <li><a href="workshops.html">Workshops</a></li>
+    <!-- Navigation Links -->
+    <ul class="nav-links">
 
-            <li><a href="sports.html">Sports</a></li>
+        <li>
+            <a href="home.html">
+                Home
+            </a>
+        </li>
 
-            <li><a href="about.html">About</a></li>
+        <li>
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+        </li>
 
-        </ul>
+        <li>
+            <a href="events.html">
+                Events
+            </a>
+        </li>
 
-        <!-- Logged-in User -->
+        <li>
+            <a href="workshops.html">
+                Workshops
+            </a>
+        </li>
 
-        <div class="user-info">
+        <li>
+            <a href="sports.html">
+                Sports
+            </a>
+        </li>
 
-            👤 <span id="userName">Guest</span>
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
+
+    </ul>
+
+    <!-- Right Section -->
+    <div class="right-section">
+
+        <!-- Dark / Light Mode -->
+        <button id="themeToggle"
+                class="theme-btn">
+
+            🌙
+
+        </button>
+
+        <!-- User Profile -->
+        <div class="user-menu">
+
+            <div id="userBtn"
+                 class="user-info">
+
+                👤 <span id="userName">
+                    Guest
+                </span>
+
+            </div>
+
+            <!-- Dropdown -->
+            <div id="userDropdown"
+                 class="dropdown">
+
+                <h4>
+                    Profile
+                </h4>
+
+                <p>
+                    <strong>Name:</strong>
+                    <span id="profileName"></span>
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    <span id="profileEmail"></span>
+                </p>
+
+                <button id="logoutBtn">
+
+                    Logout
+
+                </button>
+
+            </div>
 
         </div>
 
-    </nav>
+    </div>
 
-    <!-- Hero Section -->
-
+</nav>
     <section class="hero">
 
         <div class="hero-content">
@@ -50,9 +128,17 @@
             <h1>Welcome to CampusPulse</h1>
 
             <p>
-                Discover workshops, hackathons,
-                sports events, cultural fests,
-                and academic opportunities.
+                <p>
+    Welcome to CampusPulse, your one-stop platform for
+    exploring university-wide events and opportunities.
+    Participate in innovative workshops, exciting
+    hackathons, sports competitions, cultural celebrations,
+    seminars, and academic programs. Stay informed about
+    upcoming events, register seamlessly, showcase your
+    talents, build valuable connections, and enhance your
+    personal and professional growth through a vibrant
+    campus community.
+</p>
             </p>
 
             <a href="events.html">
@@ -92,7 +178,8 @@
 
     <section class="event-day">
 
-        <h2>🌟 Event of the Day</h2>
+        <h2>🌟 Event of the Day</h2><br>
+
 
         <div class="event-box">
 
@@ -147,20 +234,29 @@
         <div id="ai-register" class="hidden-box">
 
             <h4>Registration Form</h4>
+    <input type="text"
+           placeholder="Enter Name"
+           required>
 
-            <form>
+    <input type="email"
+           placeholder="Enter Email"
+           required>
+    <input
+                type="text"
+                placeholder="Department"
+                required>
 
-                <input type="text"
-                       placeholder="Enter Name"
-                       required>
-
-                <input type="email"
-                       placeholder="Enter Email"
-                       required>
-
-                <button type="submit">
-                    Submit
-                </button>
+    <button
+type="button"
+onclick="registerEvent(
+    'AI Workshop',
+    '25 June 2026',
+    'Workshop',
+    'Seminar Hall'
+)">
+    Register Event
+</button>
+</form>
 
             </form>
 
@@ -208,19 +304,26 @@
 
             <h4>Registration Form</h4>
 
-            <form>
+    <input type="text"
+           placeholder="Enter Name"
+           required>
 
-                <input type="text"
-                       placeholder="Enter Name"
-                       required>
+    <input type="email"
+           placeholder="Enter Email"
+           required>
 
-                <input type="email"
-                       placeholder="Enter Email"
-                       required>
+    <button
+type="button"
+onclick="registerEvent(
+    'Hackathon 2026',
+    '30 June 2026',
+    'Hackathon',
+    'Innovation Lab'
+)">
+    Register Event
+</button>
 
-                <button type="submit">
-                    Submit
-                </button>
+</form>
 
             </form>
 
@@ -268,20 +371,26 @@
         <div id="sports-register" class="hidden-box">
 
             <h4>Registration Form</h4>
+    <input type="text"
+           placeholder="Enter Name"
+           required>
 
-            <form>
+    <input type="email"
+           placeholder="Enter Email"
+           required>
 
-                <input type="text"
-                       placeholder="Enter Name"
-                       required>
+    <button
+type="button"
+onclick="registerEvent(
+    'Sports Meet',
+    '05 July 2026',
+    'Sports',
+    'College Ground'
+)">
+    Register Event
+</button>
 
-                <input type="email"
-                       placeholder="Enter Email"
-                       required>
-
-                <button type="submit">
-                    Submit
-                </button>
+</form>
 
             </form>
 
@@ -337,7 +446,14 @@
     </footer>
 
     <script src="home.js"></script>
+<div class="page-navigation">
 
+    <a href="events.html">
+        <button>Next →</button>
+    </a>
+
+</div>
+<div id="notification" class="notification"></div>
 </body>
 
 </html>

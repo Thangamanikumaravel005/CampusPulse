@@ -37,19 +37,15 @@ const events = [
 const eventsList =
 document.getElementById("eventsList");
 
+let selectedEvent = null;
+
+/* DISPLAY EVENTS */
+
 function displayEvents(data){
 
-    eventsList.innerHTML="";
+    eventsList.innerHTML = "";
 
-    if(data.length===0){
-
-        eventsList.innerHTML=
-        "<h3>No events found.</h3>";
-
-        return;
-    }
-
-    data.forEach(event=>{
+    data.forEach(event => {
 
         eventsList.innerHTML += `
 
@@ -68,24 +64,28 @@ function displayEvents(data){
 
             <div class="button-group">
 
-    <button
-    onclick="showDetails('${event.name}',
-                         '${event.date}',
-                         '${event.venue}',
-                         '${event.description}')">
+                <button
+                onclick="showDetails(
+                '${event.name}',
+                '${event.date}',
+                '${event.venue}',
+                '${event.description}'
+                )">
 
-        View Details
+                View Details
 
-    </button>
+                </button>
 
-    <button
-    onclick="showRegister('${event.name}')">
+                <button
+                onclick="showRegister(
+                '${event.name}'
+                )">
 
-        Register
+                Register
 
-    </button>
+                </button>
 
-</div>
+            </div>
 
         </div>
 
@@ -93,17 +93,18 @@ function displayEvents(data){
     });
 
 }
+
 displayEvents(events);
-document
-.getElementById("searchInput")
+
+/* FILTERS */
+
+document.getElementById("searchInput")
 .addEventListener("input", applyFilters);
 
-document
-.getElementById("dateFilter")
+document.getElementById("dateFilter")
 .addEventListener("change", applyFilters);
 
-document
-.getElementById("categoryFilter")
+document.getElementById("categoryFilter")
 .addEventListener("change", applyFilters);
 
 function applyFilters(){
@@ -121,28 +122,21 @@ function applyFilters(){
     .value;
 
     const filtered =
-    events.filter(event =>{
+    events.filter(event => {
 
-        const matchesName =
-        event.name.toLowerCase()
-        .includes(search);
-
-        const matchesDate =
-        !date || event.date===date;
-
-        const matchesCategory =
-        category==="all" ||
-        event.category===category;
-
-        return matchesName
-            && matchesDate
-            && matchesCategory;
+        return (
+            event.name.toLowerCase().includes(search) &&
+            (!date || event.date === date) &&
+            (category === "all" || event.category === category)
+        );
 
     });
 
     displayEvents(filtered);
 
 }
+
+/* DETAILS POPUP */
 
 function showDetails(
     title,
@@ -151,40 +145,40 @@ function showDetails(
     description
 ){
 
-    document.getElementById(
-        "popupTitle"
-    ).innerText=title;
+    document.getElementById("popupTitle").textContent =
+    title;
 
-    document.getElementById(
-        "popupDate"
-    ).innerText=
+    document.getElementById("popupDate").textContent =
     "Date: " + date;
 
-    document.getElementById(
-        "popupVenue"
-    ).innerText=
+    document.getElementById("popupVenue").textContent =
     "Venue: " + venue;
 
-    document.getElementById(
-        "popupDescription"
-    ).innerText=
+    document.getElementById("popupDescription").textContent =
     description;
 
-    document.getElementById(
-        "popup"
-    ).style.display="block";
+    document.getElementById("popup").style.display =
+    "block";
+
 }
 
-document
-.getElementById("closeBtn")
-.addEventListener("click",()=>{
+document.getElementById("closeBtn")
+.addEventListener("click", function(){
 
-    document.getElementById(
-        "popup"
-    ).style.display="none";
+    document.getElementById("popup").style.display =
+    "none";
 
 });
+
+/* REGISTER POPUP */
+
 function showRegister(eventName){
+
+    selectedEvent =
+    events.find(
+        event =>
+        event.name === eventName
+    );
 
     document.getElementById(
         "registerPopup"
@@ -192,9 +186,8 @@ function showRegister(eventName){
 
 }
 
-document
-.getElementById("closeRegisterBtn")
-.addEventListener("click", () => {
+document.getElementById("closeRegisterBtn")
+.addEventListener("click", function(){
 
     document.getElementById(
         "registerPopup"
@@ -202,18 +195,150 @@ document
 
 });
 
-document
-.getElementById("registerForm")
+/* REGISTER EVENT */
+
+document.getElementById("registerForm")
 .addEventListener("submit", function(e){
 
     e.preventDefault();
 
-    alert(
-        "Registration Successful!"
+    const currentUser =
+    JSON.parse(
+        localStorage.getItem(
+            "currentUser"
+        )
     );
+
+    if(!currentUser){
+
+        alert("Please Login First");
+
+        window.location.href =
+        "login.html";
+
+        return;
+    }
+
+    let registeredEvents =
+    JSON.parse(
+        localStorage.getItem(
+            "registeredEvents"
+        )
+    ) || [];
+
+    const alreadyRegistered =
+    registeredEvents.some(
+        event =>
+
+        event.userEmail ===
+        currentUser.email &&
+
+        event.eventName ===
+        selectedEvent.name
+    );
+
+    if(alreadyRegistered){
+
+        alert(
+            "Already Registered!"
+        );
+
+        return;
+    }
+
+    registeredEvents.push({
+
+        userName:
+        currentUser.name,
+
+        userEmail:
+        currentUser.email,
+
+        eventName:
+        selectedEvent.name,
+
+        category:
+        selectedEvent.category,
+
+        date:
+        selectedEvent.date,
+
+        venue:
+        selectedEvent.venue,
+
+        status:
+        "Registered"
+
+    });
+
+    localStorage.setItem(
+
+        "registeredEvents",
+
+        JSON.stringify(
+            registeredEvents
+        )
+
+    );
+
+    alert(
+        selectedEvent.name +
+        " Registered Successfully!"
+    );
+
+    document.getElementById(
+        "registerForm"
+    ).reset();
 
     document.getElementById(
         "registerPopup"
     ).style.display = "none";
 
 });
+
+/* CLOSE POPUP OUTSIDE */
+
+window.onclick = function(event){
+
+    const popup =
+    document.getElementById("popup");
+
+    const registerPopup =
+    document.getElementById("registerPopup");
+
+    if(event.target === popup){
+
+        popup.style.display =
+        "none";
+
+    }
+
+    if(event.target === registerPopup){
+
+        registerPopup.style.display =
+        "none";
+
+    }
+
+};
+function showNotification(message){
+
+    const notification =
+    document.getElementById(
+        "notification"
+    );
+
+    notification.textContent =
+    message;
+
+    notification.style.display =
+    "block";
+
+    setTimeout(function(){
+
+        notification.style.display =
+        "none";
+
+    },3000);
+
+}

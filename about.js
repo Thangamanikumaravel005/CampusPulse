@@ -90,3 +90,14 @@ window.onclick = function(event){
     }
 
 };
+function goHomeWithFeedback(){
+
+    window.open(
+        "https://forms.gle/GW8UhS5eDuYBNTUA7",
+        "_blank"
+    );
+
+    window.location.href =
+    "home.html";
+
+}

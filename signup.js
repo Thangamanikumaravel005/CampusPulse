@@ -1,77 +1,54 @@
-function togglePassword(id){
+function togglePassword(id) {
 
-    const password =
-    document.getElementById(id);
+    const passwordField = document.getElementById(id);
 
-    if(password.type === "password"){
-
-        password.type = "text";
-
-    }
-    else{
-
-        password.type = "password";
-
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
     }
 
 }
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+document.getElementById("signupForm").addEventListener("submit", function(event) {
 
-        const signupForm =
-        document.getElementById("signupForm");
+    event.preventDefault();
 
-        if(signupForm){
+    const userName = document.getElementById("userName").value.trim();
+    const collegeName = document.getElementById("collegeName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("signupPassword").value;
 
-            signupForm.addEventListener(
-                "submit",
-                function(event){
+    const newUser = {
+        name: userName,
+        college: collegeName,
+        email: email,
+        password: password,
+        createdAt: new Date().toLocaleString()
+    };
 
-                    event.preventDefault();
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-                    const userName =
-                    document.getElementById(
-                        "userName"
-                    ).value;
+    const userExists = users.some(
+        user => user.email.toLowerCase() === email.toLowerCase()
+    );
 
-                    const collegeName =
-                    document.getElementById(
-                        "collegeName"
-                    ).value;
-
-                    const email =
-                    document.getElementById(
-                        "email"
-                    ).value;
-
-                    localStorage.setItem(
-                        "userName",
-                        userName
-                    );
-
-                    localStorage.setItem(
-                        "collegeName",
-                        collegeName
-                    );
-
-                    localStorage.setItem(
-                        "userEmail",
-                        email
-                    );
-
-                    alert(
-                        "Signup Successful!"
-                    );
-
-                    window.location.href =
-                    "home.html";
-
-                }
-            );
-
-        }
-
+    if (userExists) {
+        alert("Email already registered!");
+        return;
     }
-);
+
+    users.push(newUser);
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+    alert("Account Created Successfully!");
+
+    document.getElementById("signupForm").reset();
+
+    window.location.href = "login.html";
+
+});
